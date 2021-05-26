@@ -1,25 +1,24 @@
 package com.tab.controller;
+/**
+ * 食物分享业务控制器，包括跳转路由
+ */
 
 import com.tab.pojo.Category;
 import com.tab.pojo.Commentary;
 import com.tab.pojo.Food;
 import com.tab.service.FoodService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 @Controller
 @RequestMapping("/food")
 public class FoodController {
