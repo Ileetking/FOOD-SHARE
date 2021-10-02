@@ -2,6 +2,7 @@ package com.tab.controller;
 
 import com.tab.pojo.User;
 import com.tab.service.UserService;
+import com.util.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,15 +36,18 @@ public class UserController {
     public String tologin(){
         return "user/login";
     }
-
-
     @RequestMapping("/login")
-    public String login(String username, String password, HttpSession httpSession){
+    public String login(String username, String password, HttpSession httpSession) throws Exception {
         if(userService.getuser(username).getPassword().equals(password)){
             httpSession.setAttribute("username",username);
             System.out.println("uid为："+userService.getuser(username).getUid());
+            IpUtil getlocalip=new IpUtil();
+//            System.out.println("当前的本地ip地址为："+IpUtil.getIpAddress(request));
+//            System.out.println("当前的局域网ip地址为："+getlocalip.getLocalHostIP());
+            System.out.println("当前的地理地址为："+getlocalip.getipjson(IpUtil.getV4IP()));
             httpSession.setAttribute("uid",userService.getuser(username).getUid());
             httpSession.setAttribute("uimage",userService.getuser(username).getUimage());
+            httpSession.setAttribute("address",getlocalip.getipjson(IpUtil.getV4IP()));
             return "index1";
         }
         else

@@ -100,44 +100,27 @@
                       <span><%=request.getSession().getAttribute("username")%></span>
                     </div>
                   </div>
-
-                  <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
-                    <div class="col-md-4 text-center grid">
-                      <i class="fa fa-user" style="font-size: 25px;line-height: 45px;"></i>
-                      <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
-                        个人中心</p>
-                    </div>
-                    <div class="col-md-4 text-center grid">
-                      <i class="fa fa-gear" style="font-size: 25px;line-height: 45px;"></i>
-                      <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
-                        账号管理</p>
-                    </div>
-                    <div class="col-md-4 text-center grid">
-                      <i class="fa fa-key" style="font-size: 25px;line-height: 45px;"></i>
-                      <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
-                        密码修改</p>
-                    </div>
+                  <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
+                    <p><%=request.getSession().getAttribute("address")%><a href="#" style="font-size: 10px">（切换城市）</a></p>
                   </div>
 
                   <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
                     <div class="col-md-4 text-center grid">
                       <i class="fa fa-user-circle" style="font-size: 25px;line-height: 45px;"></i>
                       <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
-                       <a href="${pageContext.request.contextPath}/user/userimage.jsp">修改头像</a></p>
+                        <a href="${pageContext.request.contextPath}/user/userimage.jsp">修改头像</a></p>
+                    </div>
+                    <div class="col-md-4 text-center grid">
+                      <i class="fa fa-key" style="font-size: 25px;line-height: 45px;"></i>
+                      <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
+                        密码修改</p>
                     </div>
                     <div class="col-md-4 text-center grid">
                       <i class="fa fa-comments" style="font-size: 25px;line-height: 45px;"></i>
                       <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
                         消息</p>
                     </div>
-                    <div class="col-md-4 text-center grid">
-                      <i class="fa fa-heart-o" style="font-size: 25px;line-height: 45px;"></i>
-                      <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
-                        帮助中心</p>
-                    </div>
                   </div>
-
-
                   <div class="row" style="margin-top: 20px">
                     <div class="text-center"
                          style="padding: 15px;margin: 0px;background: #f6f5f5;color: #323534;">
