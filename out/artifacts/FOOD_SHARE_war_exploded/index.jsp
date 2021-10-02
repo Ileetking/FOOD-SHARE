@@ -101,7 +101,7 @@
                     </div>
                   </div>
                   <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
-                    <p><%=request.getSession().getAttribute("address")%><a href="#" style="font-size: 10px">（切换城市）</a></p>
+                    <p><%=request.getSession().getAttribute("address")%><a href="#" style="font-size: 12px">（切换城市）</a></p>
                   </div>
 
                   <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
@@ -157,7 +157,7 @@
           <c:if test="${allfood.fid!=null}">
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
-              <img src="${pageContext.request.contextPath}/foodimage/${allfood.img}"
+              <img src="/foodimages/${allfood.img}"
                    />
               <div class="caption">
                 <form id="fo1" action="${pageContext.request.contextPath}/food/commentaries/${allfood.fid}" method="post">
