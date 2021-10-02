@@ -1,0 +1,14 @@
+com\tab\service\FoodServiceImpl.class
+com\tab\dao\UserMapper.class
+com\tab\service\UserServiceImpl.class
+com\tab\pojo\Food.class
+com\tab\controller\UserController.class
+com\tab\controller\FoodController.class
+com\tab\pojo\User.class
+com\tab\dao\FoodMapper.class
+com\tab\service\FoodService.class
+com\tab\pojo\Category.class
+com\util\JsonUtil.class
+com\tab\pojo\Commentary.class
+com\util\IpUtil.class
+com\tab\service\UserService.class
