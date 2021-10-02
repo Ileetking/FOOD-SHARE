@@ -28,7 +28,7 @@ public class FoodController {
     public String addFood(Food food, MultipartFile file) throws IOException {
 
         // 保存图片的路径，图片上传成功后，将路径保存到数据库
-        String filePath = "D:\\IdeaProjects\\FOOD-SHARE\\web\\foodimage";
+        String filePath = "D:\\FoodImages\\foodimage";
         // 获取原始图片的扩展名
         System.out.println("开始结果：");
         //System.out.println("article为："+article);
