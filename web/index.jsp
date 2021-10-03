@@ -157,7 +157,7 @@
           <c:if test="${allfood.fid!=null}">
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
-              <img src="/foodimages/${allfood.img}"
+              <img src="/foodimages/${allfood.img}" style="width:100%; height: 200px"
                    />
               <div class="caption">
                 <form id="fo1" action="${pageContext.request.contextPath}/food/commentaries/${allfood.fid}" method="post">

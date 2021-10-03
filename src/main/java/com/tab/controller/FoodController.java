@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -56,10 +58,15 @@ public class FoodController {
        return "redirect:/food/allfood";
     }
 @RequestMapping("/toaddFood")
-    public String toaddFood(Model model){
-     List<Category> allname= foodService.queryAll();
-     model.addAttribute("allname",allname);
-        return "food/addfood";
+    public String toaddFood(Model model, HttpServletRequest request){
+        if(request.getSession().getAttribute("username")!=null){
+            List<Category> allname= foodService.queryAll();
+            model.addAttribute("allname",allname);
+            return "food/addfood";
+        }else {
+            return "user/login";
+        }
+
     }
     @RequestMapping("/allfood")
     public String allfood(Model model){
