@@ -12,7 +12,7 @@ import java.util.Date;
 public class Commentary {
   private int cid;
   private String content;
-  private Date time;
+  private String time;
   private int fid;
   private int uid;
   private User user;

@@ -1,8 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  %>
 <html>
 <head>
     <title>$Title$</title>
+<%--    <script type="text/javascript">--%>
+<%--        function a() {--%>
+<%--            <%--%>
+<%-- String username=(String)session.getAttribute("username");--%>
+<%-- if(username==null || username.equals("")){--%>
+<%-- request.getRequestDispatcher("/user/login.jsp").forward(request,response);--%>
+<%-- return;--%>
+<%-- }--%>
+<%-- %>--%>
+<%--        }--%>
+<%--    </script>--%>
 </head>
 <body>
 <div style="width: 800px;text-align: center;margin: 0 auto">

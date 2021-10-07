@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -9,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>爱美食</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +20,16 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+     a{
+       color: #323534;
+     }
+     a:hover{
+       color: deepskyblue;
+       text-decoration: none;
+     }
 
+   </style>
 
   </head>
 
@@ -147,63 +157,37 @@
 
         </nav>
         <ul class="nav nav-pills">
-          <li class="active"><a href="${pageContext.request.contextPath}/index1.jsp">推荐</a></li>
+          <li><a href="${pageContext.request.contextPath}/index1.jsp">推荐</a></li>
           <c:forEach var="category" items="${allname1}">
             <li><a href="/food/category.jsp?cid=${category.id}">${category.categoryname}</a></li>
           </c:forEach>
         </ul>
         <br>
-        <c:forEach var="allfood" items="${foods}">
+        <c:forEach var="allfood" items="${foods}" varStatus="varstatus">
           <c:if test="${allfood.fid!=null}">
-          <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-              <img src="/foodimages/${allfood.img}" style="width:100%; height: 200px"
+          <div class="col-sm-6 col-md-2">
+            <div class="thumbnail" style="height: 220px">
+              <img alt="${allfood.description}" title="${allfood.description}" src="/foodimages/${allfood.img}" style="width:100%; height: 100px" onclick="location.href='${pageContext.request.contextPath}/food/commentaries/${allfood.fid}'"
                    />
-              <div class="caption">
-                <form id="fo1" action="${pageContext.request.contextPath}/food/commentaries/${allfood.fid}" method="post">
-<%--                  <h3>${allfood.title}</h3>--%>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion"
-                           href="#${allfood.fid}">
-                            ${allfood.title}
-                        </a>
-                      </h3>
-                    </div>
-                    <div id="${allfood.fid}" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <p>${allfood.description}</p>
-                        <button type="submit">详细</button>
-                      </div>
-                    </div>
-                  </div>
-
-                </form>
-
+              <div style="height: 20px">
+                <a href="${pageContext.request.contextPath}/food/commentaries/${allfood.fid}">
+                <h6 style="margin-left:8px ">${allfood.title}</h6></a>
               </div>
+
+              <div style="width: 100%;height: 26px;margin-top: 30px;margin-bottom: 10px">
+                <img src="/foodimages/liulan.png"  style="width: 13px;height: 13px;margin-left: 8px"/>
+                <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 37px"/>
+                <p style="font-size: 13px;color: #666666;display: inline;margin-left: 3px">${allfood.time}</p>
+                <img src="/foodimages/user.png" style="width: 13px;height: 13px;margin-left: 8px"/>
+                <a style="font-size: 13px;color: #666666;" href="${pageContext.request.contextPath}/user/usermessage/${allfood.uid}">${usernames[varstatus.count-1]}</a>
+              </div>
+
 
             </div>
           </div>
           </c:if>
         </c:forEach>
 
-
-      <%--  <nav style="text-align: center;">
-          <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#">9</a></li>
-            <li><a href="#">&raquo;</a></li>
-          </ul>
-        </nav>--%>
       </div>
     </div>
   </div>

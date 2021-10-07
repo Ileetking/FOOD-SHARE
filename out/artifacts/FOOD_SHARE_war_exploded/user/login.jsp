@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,7 +12,19 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+     <script>
+         // $(function(){
+         //     $("#logi").on("click",function () {
+         //         if($("#username").val() == ""){
+         //             alert("账号不能为空")
+         //         } else {
+         //             if($("#password").val().length < 6){
+         //                 alert("密码不能少于六位");
+         //             }
+         //         }
+         //     });
+         // });
+     </script>
 
     <style type="text/css">
         body{background: url(../image/4.jpg) no-repeat;background-size:cover;font-size: 16px;}
@@ -28,6 +41,7 @@
     <div class="form row">
         <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form" action="${pageContext.request.contextPath}/user/login" method="post">
             <h3 class="form-title">登录美食屋</h3>
+             <span id="logininfo" style="color: red"><%if (request.getSession().getAttribute("loginmsg")!=null){%><%=request.getSession().getAttribute("loginmsg")%><%session.removeAttribute("loginmsg");}%></span>
             <div class="col-sm-9 col-md-9">
                 <div class="form-group">
                     <i class="fa fa-user fa-lg"></i>
@@ -38,7 +52,7 @@
                     <input class="form-control required" type="password" placeholder="Password" name="password" maxlength="8"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success pull-right" value="登录 "/>
+                    <input type="submit" class="btn btn-success pull-right" id="logi" value="登录"/>
                 </div>
             </div>
         </form>

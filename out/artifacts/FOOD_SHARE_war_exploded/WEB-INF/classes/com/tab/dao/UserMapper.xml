@@ -12,4 +12,7 @@
     <update id="updateuserimage" parameterType="Map">
         update user set uimage=#{uimage} where uid=#{uid}
     </update>
+    <select id="getusernamebyuid" resultType="String">
+        select username from user where uid=#{uid}
+    </select>
 </mapper>

@@ -19,4 +19,5 @@ public class UserServiceImpl implements UserService {
     public int updateuserimage(HashMap hashMap) {
         return userMapper.updateuserimage(hashMap);
     }
+    public String getusernamebyuid(int uid) {return userMapper.getusernamebyuid(uid);}
 }

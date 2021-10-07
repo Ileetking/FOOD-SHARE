@@ -3,6 +3,7 @@ package com.tab.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
@@ -14,7 +15,8 @@ public class Food {
     private String description;
     private String img;
     private String article;
-    private Date time;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String time;
     private int uid;
     private int cid;
 

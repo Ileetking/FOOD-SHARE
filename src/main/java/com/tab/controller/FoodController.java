@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +34,10 @@ public class FoodController {
 
         // 保存图片的路径，图片上传成功后，将路径保存到数据库
         String filePath = "D:\\FoodImages\\foodimage";
+        File file1=new File(filePath);
+        if(!file1.exists()){
+            file1.mkdir();
+        }
         // 获取原始图片的扩展名
         System.out.println("开始结果：");
         //System.out.println("article为："+article);
@@ -45,12 +52,14 @@ public class FoodController {
         System.out.println(targetFile);
         //file.transferTo(targetFile);
         Date date=new Date();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        String datime=format.format(date);
         System.out.println(date);
 
         System.out.println("cid为："+food.getCid());
         //System.out.println(Integer.parseInt(cid));
         // 保存到数据库
-        food.setTime(date);
+        food.setTime(datime);
         //food.setCid(Integer.parseInt(cid));
         file.transferTo(targetFile);
         food.setImg(newFileName);
@@ -64,16 +73,22 @@ public class FoodController {
             model.addAttribute("allname",allname);
             return "food/addfood";
         }else {
+
             return "user/login";
         }
 
     }
     @RequestMapping("/allfood")
     public String allfood(Model model){
-        List<Category> allname= foodService.queryAll();
-        List<Food> foods=foodService.queryFood();
-        model.addAttribute("allname1",allname);
-        model.addAttribute("foods",foods);
+            List<Category> allname= foodService.queryAll();
+            List<Food> foods=foodService.queryFood();
+            List<String> usernames=new ArrayList<String>();
+        for (Food food : foods) {
+            usernames.add(foodService.queryUsernameByUid(food.getUid()));
+        }
+            model.addAttribute("usernames",usernames);
+            model.addAttribute("allname1",allname);
+            model.addAttribute("foods",foods);
         return "index";
     }
     @RequestMapping("/article1/{fid}")
@@ -101,12 +116,15 @@ public class FoodController {
         return "index";
    }
    @RequestMapping("/addcommentary")
-   public  String Addcommentary(int fid,Commentary commentary,Model model){
-        Date date=new Date();
-        commentary.setTime(date);
-        foodService.Addcommentary(commentary);
-        model.addAttribute("fid",fid);
-        return "food/article1";
+   public  String Addcommentary(int fid, Commentary commentary, Model model){
+            Date date=new Date();
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+            String datime=format.format(date);
+            commentary.setTime(datime);
+            foodService.Addcommentary(commentary);
+            model.addAttribute("fid",fid);
+            return "food/article1";
+
    }
    @RequestMapping("/commentaries/{fid}")
     public String querycommentarysByFid(@PathVariable("fid") int fid,Model model){

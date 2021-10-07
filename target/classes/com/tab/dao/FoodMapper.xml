@@ -27,6 +27,9 @@
     <select id="querycommentarysByFid" resultMap="UserCommentary">
          SELECT * FROM commentary where fid=#{fid}
     </select>
+    <select id="queryFoodById" resultType="Food">
+        select * from food where uid=#{uid};
+    </select>
 <resultMap id="UserCommentary" type="Commentary">
     <result property="cid" column="cid"></result>
     <result property="content" column="content"></result>

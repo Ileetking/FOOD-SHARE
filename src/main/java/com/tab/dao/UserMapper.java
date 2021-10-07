@@ -10,6 +10,7 @@ public interface UserMapper {
    // String getPsw(String username);
     User getuser(String usernmae);
     int updateuserimage(HashMap hashMap);
+    public String getusernamebyuid(int uid);
 
 
 }
