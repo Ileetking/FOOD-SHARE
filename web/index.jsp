@@ -65,7 +65,7 @@
                   <li class="divider">
                   </li>
                   <li>
-                    <a href="#">个人信息</a>
+                    <a href="#">个人主页</a>
                   </li>
                   <li class="divider">
                   </li>
@@ -94,7 +94,7 @@
                 <a href="#" class="dropdown-toggle"
                    data-toggle="dropdown"
                    style="height: 60px">
-                  <img alt="" class="img-circle" src="${pageContext.request.contextPath}/userimage/<%=request.getSession().getAttribute("uimage")%>" width="38px" height="38px"/>
+                  <img alt="" class="img-circle" src="/foodimages/<%=request.getSession().getAttribute("uimage")%>" width="38px" height="38px"/>
                   <span style="color: #000000;font-size: 15px">
                                 <i><%=request.getSession().getAttribute("username")%></i>
                             </span>
@@ -103,7 +103,7 @@
                      style="background: #FFFFFF;width: 320px;overflow: hidden">
                   <div style="margin-top: 16px;border-bottom: 1px solid #eeeeee">
                     <div style="text-align: center">
-                      <img class="img-circle" src="<%=request.getSession().getServletContext().getRealPath("userimage")%>\<%=request.getSession().getAttribute("uimage")%>"
+                      <img class="img-circle" src="/foodimages/<%=request.getSession().getAttribute("uimage")%> " onclick="location.href='${pageContext.request.contextPath}/user/usermessage/<%=request.getSession().getAttribute("uid")%>'"
                            style="width: 38px;height: 38px;"/>
                     </div>
                     <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">

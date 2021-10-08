@@ -25,7 +25,7 @@
     <div  style="background-image: url('/image/userba.jpg');height: 260px;width: 1200px;margin-top: 0px;margin-left:160px">
 
         <div style="width: 60px;height: 60px">
-            <img class="img-circle" src="/foodimages/muwangqing.jpg" width="70px" height="70px" style="margin-left: 30px;margin-top: 170px"/>
+            <img class="img-circle" src="/foodimages/${userimage}" width="70px" height="70px" style="margin-left: 30px;margin-top: 170px"/>
         </div>
         <div style="margin-left: 130px;margin-top: 120px;height: auto;width: auto">
             <p style="color: #f6f5f5;font-family: 'Adobe 繁黑體 Std B';font-size: 22px">${username}</p>
@@ -38,7 +38,7 @@
         </div>
     </div>
 <div style="background: #ffffff;margin-top: 85px;margin-left: 160px;width: 800px;height: 800px;float: left;border-radius: 3px">
-    <h3 style="margin-left: 20px;margin-top: 20px">TA的视频</h3>
+    <h3 style="margin-left: 20px;margin-top: 20px">TA的美食</h3>
     <div style="margin-top: 20px">
     <c:forEach var="allfood" items="${userfoods}" varStatus="varstatus">
         <c:if test="${allfood.fid!=null}">

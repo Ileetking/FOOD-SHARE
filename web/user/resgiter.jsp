@@ -28,6 +28,7 @@
     <div class="form row">
         <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form" action="${pageContext.request.contextPath}/user/register" method="post">
             <h3 class="form-title">加入我们吧！</h3>
+            <span style="color: red">${errormsg}</span>
             <div class="col-sm-9 col-md-9">
                 <div class="form-group">
                     <i class="fa fa-user fa-lg"></i>

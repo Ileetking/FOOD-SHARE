@@ -19,7 +19,7 @@
 <div style="width: 800px;text-align: center;margin: 0 auto">
     <div style="margin-top: 16px;border-bottom: 1px solid #eeeeee">
         <div style="text-align: center">
-            <img class="img-circle" src="${pageContext.request.contextPath}/image/4.jpg"
+            <img class="img-circle" src="/foodimages/${userimage}"
                  style="width: 45px;height: 45px;"/>
 
         </div>
@@ -42,10 +42,10 @@
 
     </div>
  <div>
-     <c:forEach var="commentary" items="${commentaries}">
+     <c:forEach var="commentary" items="${commentaries}" varStatus="varstatus">
      <div style="margin-bottom: 10px;margin-top: 10px;text-align: left" >
          <P>
-             <img class="img-circle" src="${pageContext.request.contextPath}/image/4.jpg"
+             <img class="img-circle" src="/foodimages/${userimages[varstatus.count-1]}"
                   style="width: 20px;height: 20px;"/>${commentary.user.username}:&nbsp;&nbsp;${commentary.content}
          </P>
      </div>

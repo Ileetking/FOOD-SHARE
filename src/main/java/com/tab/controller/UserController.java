@@ -33,12 +33,32 @@ public class UserController {
     @Qualifier("FoodServiceImpl")
     private FoodService foodService;
     @RequestMapping("/toresgiter")
-    public String toresgiter(){
+    public String toresgiter(Model model)
+    {
+        model.addAttribute("errormsg","");
         return "user/resgiter";
     }
     @RequestMapping("/register")
-    public String adduser(User user){
+    public String adduser(User user,Model model){
         System.out.println(user);
+        String username=user.getUsername();
+        if(user.getUsername().equals("")){
+            model.addAttribute("errormsg","用户名不能为空!!");
+            return "user/resgiter";
+        }
+        if(user.getPassword().equals("")){
+            model.addAttribute("errormsg","密码不能为空!!");
+            return "user/resgiter";
+        }
+        if(user.getPassword().length()<5){
+            model.addAttribute("errormsg","密码长度不能小于5位~~");
+            return "user/resgiter";
+        }
+         if(userService.getuser(username)!=null){
+            model.addAttribute("errormsg","用户名重复~~");
+            return "user/resgiter";
+        }
+        user.setUimage("muwangqing.jpg");
          userService.addUser(user);
          return "user/login";
     }
@@ -94,9 +114,9 @@ public class UserController {
         return "index1";
     }
     @RequestMapping("/updateuserimage")
-    public String addheadimage(MultipartFile file, int uid) throws IOException {
+    public String addheadimage(MultipartFile file, int uid,HttpSession httpSession) throws IOException {
         System.out.println("头像UID："+uid);
-            String userimagepath="D:\\FoodImages\\userimage";
+            String userimagepath="D:\\FoodImages\\foodimage";
         File file2=new File(userimagepath);
         if(!file2.exists()){
             file2.mkdir();
@@ -110,15 +130,20 @@ public class UserController {
         hashMap.put("uimage",newfilename);
         hashMap.put("uid",uid);
             userService.updateuserimage(hashMap);
+        httpSession.removeAttribute("uimage");
+        String username= (String) httpSession.getAttribute("username");
+        System.out.println("用户名为；"+httpSession.getAttribute("username"));
+        httpSession.setAttribute("uimage",userService.getuser(username).getUimage());
         return "index1";
     }
     @RequestMapping("/usermessage/{uid}")
     public String usermessage(@PathVariable("uid")int uid, Model model){
         System.out.println("uid为："+uid);
+        String username=userService.getusernamebyuid(uid);
         List<Food> userfoods=foodService.queryFoodById(uid);
-        System.out.println(userfoods);
-        System.out.println("有多少个"+userfoods.size());
-        model.addAttribute("username",userService.getusernamebyuid(uid));
+        model.addAttribute("userimage",userService.getuser(username).getUimage());
+        System.out.println();
+        model.addAttribute("username",username);
         model.addAttribute("userfoods",userfoods);
         return "user/user";
     }

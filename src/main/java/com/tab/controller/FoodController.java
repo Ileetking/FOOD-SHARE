@@ -6,6 +6,7 @@ import com.tab.pojo.Category;
 import com.tab.pojo.Commentary;
 import com.tab.pojo.Food;
 import com.tab.service.FoodService;
+import com.tab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class FoodController {
     @Autowired
     @Qualifier("FoodServiceImpl")
     private FoodService foodService;
+    @Autowired
+    @Qualifier("UserServiceImpl")
+    private UserService userService;
     @RequestMapping("/addFood")
     public String addFood(Food food, MultipartFile file) throws IOException {
 
@@ -79,13 +83,14 @@ public class FoodController {
 
     }
     @RequestMapping("/allfood")
-    public String allfood(Model model){
+    public String allfood(Model model,HttpSession httpSession){
             List<Category> allname= foodService.queryAll();
             List<Food> foods=foodService.queryFood();
             List<String> usernames=new ArrayList<String>();
         for (Food food : foods) {
             usernames.add(foodService.queryUsernameByUid(food.getUid()));
         }
+
             model.addAttribute("usernames",usernames);
             model.addAttribute("allname1",allname);
             model.addAttribute("foods",foods);
@@ -129,11 +134,21 @@ public class FoodController {
    @RequestMapping("/commentaries/{fid}")
     public String querycommentarysByFid(@PathVariable("fid") int fid,Model model){
        Food food=foodService.queryFoodByFid(fid);
+       String username=foodService.queryUsernameByUid(food.getUid());
        model.addAttribute("food",food);
-       model.addAttribute("username",foodService.queryUsernameByUid(food.getUid()));
+       model.addAttribute("userimage",userService.getuser(username).getUimage());
+       model.addAttribute("username",username);
        List<Commentary> commentaries=foodService.querycommentarysByFid(fid);
-       System.out.println(commentaries);
+       List<String> userimages=new ArrayList<String>();
+       for (Commentary commentary : commentaries) {
+
+//           System.out.println("id为："+commentary.getUid());
+//           System.out.println("username为："+foodService.queryUsernameByUid(commentary.getUid()));
+//           System.out.println(userService.getuser(foodService.queryUsernameByUid(commentary.getUid())));
+           userimages.add(commentary.getUser().getUimage());
+       }
             model.addAttribute("commentaries",commentaries);
+            model.addAttribute("userimages",userimages);
             return "food/article";
     }
 

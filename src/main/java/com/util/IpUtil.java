@@ -131,6 +131,7 @@ public class IpUtil {
         if(m.find()){
             ip = m.group(1);
         }
+        System.out.println("你的ip为："+ip);
         return ip;
 
     }
