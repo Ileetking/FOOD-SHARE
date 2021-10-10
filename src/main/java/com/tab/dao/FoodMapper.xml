@@ -4,8 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tab.dao.FoodMapper">
     <insert id="addFood" parameterType="Food">
-      insert into food(title,description,img,article,time,uid,cid) value (#{title},#{description},#{img},#{article},#{time},#{uid},#{cid})
+      insert into food(title,description,img,article,time,uid,cid,address) value (#{title},#{description},#{img},#{article},#{time},#{uid},#{cid},#{address})
     </insert>
+    <delete id="deleteFood" parameterType="int">
+        delete * from food where fid=#{fid}
+    </delete>
     <select id="queryAll" resultType="Category">
         select * from category
     </select>
@@ -19,7 +22,7 @@
         select username from user where uid=#{uid}
     </select>
     <select id="queryFoodByCid" resultType="Food">
-        select * from food where cid=#{cid};
+        select * from food where cid=#{cid}
     </select>
     <select id="queryFoodBysearch" resultType="Food">
         select * from food where title like concat('%',#{search},'%')
@@ -28,7 +31,7 @@
          SELECT * FROM commentary where fid=#{fid}
     </select>
     <select id="queryFoodById" resultType="Food">
-        select * from food where uid=#{uid};
+        select * from food where uid=#{uid}
     </select>
 <resultMap id="UserCommentary" type="Commentary">
     <result property="cid" column="cid"></result>
@@ -42,5 +45,8 @@
   <insert id="Addcommentary" parameterType="Commentary">
       insert into commentary(cid,content,time,fid,uid) value (#{cid},#{content},#{time},#{fid},#{uid})
   </insert>
+    <select id="queryusersbyserch" resultType="User">
+        select * from user where username like concat('%',#{search},'%')
+    </select>
 
 </mapper>

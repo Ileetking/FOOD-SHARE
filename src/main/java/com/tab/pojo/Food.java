@@ -19,5 +19,6 @@ public class Food {
     private String time;
     private int uid;
     private int cid;
+    private String address;
 
 }

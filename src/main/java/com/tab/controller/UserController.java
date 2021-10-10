@@ -1,5 +1,6 @@
 package com.tab.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.tab.pojo.Food;
 import com.tab.pojo.User;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,14 +139,63 @@ public class UserController {
         return "index1";
     }
     @RequestMapping("/usermessage/{uid}")
-    public String usermessage(@PathVariable("uid")int uid, Model model){
-        System.out.println("uid为："+uid);
+    public String usermessage(@PathVariable("uid")int uid, Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                              @RequestParam(name = "size",required = true,defaultValue = "16")int size){
         String username=userService.getusernamebyuid(uid);
-        List<Food> userfoods=foodService.queryFoodById(uid);
+        List<Food> userfoods=foodService.queryFoodById(uid,page,size);
+        PageInfo pageInfo=new PageInfo(userfoods);
         model.addAttribute("userimage",userService.getuser(username).getUimage());
-        System.out.println();
+        if(userService.getgonggaobyuid(uid)==null){
+            model.addAttribute("gonggao","暂无公告~~");
+        }
+        else {
+            String gonggao = userService.getgonggaobyuid(uid);
+            model.addAttribute("gonggao",gonggao);
+        }
+        if(userService.getzhuyemessage(uid)==null){
+            model.addAttribute("zhuyemessage","暂无描述~~");
+        }
+        else {
+            String zhuyemessage = userService.getzhuyemessage(uid);
+            model.addAttribute("zhuyemessage",zhuyemessage);
+        }
         model.addAttribute("username",username);
-        model.addAttribute("userfoods",userfoods);
+        model.addAttribute("userfoods",pageInfo);
         return "user/user";
     }
+    @RequestMapping("/updatename/{uid}")
+    public String updatename(@PathVariable("uid")int uid,String username){
+        if(userService.getusernamebyuid(uid).equals(username)){
+            return "user/errormessage";
+        }
+        HashMap<String,Object> hashMap=new HashMap<String, Object>();
+        hashMap.put("username",username);
+        hashMap.put("uid",uid);
+        userService.updateusername(hashMap);
+        return "user/successmessage";
+    }
+    @RequestMapping("/updategonggao/{uid}")
+    public String updategonggao(@PathVariable("uid")int uid,String gonggao){
+        HashMap<String,Object> hashMap=new HashMap<String, Object>();
+        hashMap.put("gonggao",gonggao);
+        hashMap.put("uid",uid);
+        userService.updategonggao(hashMap);
+        return "user/successmessage";
+    }
+  @RequestMapping("tozuye")
+    public String tozhuyemamage(HttpServletRequest request){
+        if(request.getSession().getAttribute("username")!=null){
+            return "user/usermanage";
+        }
+        return "user/login";
+    }
+    @RequestMapping("/updatezhuyemessage/{uid}")
+    public String updatezhuyemessage(@PathVariable("uid")int uid,String zhuyemessage){
+        HashMap<String,Object> hashMap=new HashMap<String, Object>();
+        hashMap.put("zhuyemessage",zhuyemessage);
+        hashMap.put("uid",uid);
+        userService.updatezhuyemessage(hashMap);
+        return "user/successmessage";
+    }
+
 }

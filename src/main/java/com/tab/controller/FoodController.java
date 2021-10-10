@@ -2,9 +2,12 @@ package com.tab.controller;
 /**
  * 食物分享业务控制器，包括跳转路由
  */
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tab.pojo.Category;
 import com.tab.pojo.Commentary;
 import com.tab.pojo.Food;
+import com.tab.pojo.User;
 import com.tab.service.FoodService;
 import com.tab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +38,7 @@ public class FoodController {
     @Qualifier("UserServiceImpl")
     private UserService userService;
     @RequestMapping("/addFood")
-    public String addFood(Food food, MultipartFile file) throws IOException {
+    public String addFood(Food food, MultipartFile file,HttpSession session) throws IOException {
 
         // 保存图片的路径，图片上传成功后，将路径保存到数据库
         String filePath = "D:\\FoodImages\\foodimage";
@@ -67,6 +71,8 @@ public class FoodController {
         //food.setCid(Integer.parseInt(cid));
         file.transferTo(targetFile);
         food.setImg(newFileName);
+        String address= (String) session.getAttribute("address");
+        food.setAddress(address);
        foodService.addFood(food);
        return "redirect:/food/allfood";
     }
@@ -77,23 +83,25 @@ public class FoodController {
             model.addAttribute("allname",allname);
             return "food/addfood";
         }else {
-
             return "user/login";
         }
 
     }
     @RequestMapping("/allfood")
-    public String allfood(Model model,HttpSession httpSession){
+    public String allfood(Model model,
+                          @RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                          @RequestParam(name = "size",required = true,defaultValue = "18")int size){
             List<Category> allname= foodService.queryAll();
-            List<Food> foods=foodService.queryFood();
+            List<Food> foods=foodService.queryFood(page, size);
             List<String> usernames=new ArrayList<String>();
         for (Food food : foods) {
             usernames.add(foodService.queryUsernameByUid(food.getUid()));
         }
+        PageInfo pageInfo=new PageInfo(foods);
 
             model.addAttribute("usernames",usernames);
             model.addAttribute("allname1",allname);
-            model.addAttribute("foods",foods);
+            model.addAttribute("foods",pageInfo);
         return "index";
     }
     @RequestMapping("/article1/{fid}")
@@ -105,20 +113,38 @@ public class FoodController {
         return "food/article";
     }
     @RequestMapping("/categoryfood/{cid}")
-   public String querycategorybyid(@PathVariable("cid")int cid,Model model){
+   public String querycategorybyid(@PathVariable("cid")int cid,Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                                   @RequestParam(name = "size",required = true,defaultValue = "18")int size){
         List<Category> allname= foodService.queryAll();
-        List<Food> foods=foodService.queryFoodByCid(cid);
+        List<Food> foods=foodService.queryFoodByCid(cid,page,size);
+        List<String> usernames=new ArrayList<String>();
+        for (Food food : foods) {
+            usernames.add(foodService.queryUsernameByUid(food.getUid()));
+        }
+        PageInfo pageInfo=new PageInfo(foods);
+        model.addAttribute("usernames",usernames);
         model.addAttribute("allname1",allname);
-        model.addAttribute("foods",foods);
+        model.addAttribute("foods",pageInfo);
         return "index";
    }
    @RequestMapping("/searchfood")
    public String queryfoodBysearch(String search,Model model){
        List<Category> allname= foodService.queryAll();
         List<Food> foods=foodService.queryFoodBysearch(search);
+        List<User> users=foodService.queryusersbyserch(search);
         model.addAttribute("foods",foods);
+        model.addAttribute("nouser","");
+        model.addAttribute("nofood","");
+        if(users.size()==0){
+            model.addAttribute("nouser","找不到该用户~~");
+        }
+        if(foods.size()==0){
+            model.addAttribute("nofood","很抱歉找不到该美食~~");
+        }
+        System.out.println(users);
+        model.addAttribute("users",users);
         model.addAttribute("allname1",allname);
-        return "index";
+        return "food/serch";
    }
    @RequestMapping("/addcommentary")
    public  String Addcommentary(int fid, Commentary commentary, Model model){

@@ -11,6 +11,7 @@
 <html>
   <head>
     <title>爱美食</title>
+    <link rel="icon" href="/foodimages/tubiao1.png" type="image/x-icon"/>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +66,7 @@
                   <li class="divider">
                   </li>
                   <li>
-                    <a href="#">个人主页</a>
+                    <a href="${pageContext.request.contextPath}/user/tozuye">主页管理</a>
                   </li>
                   <li class="divider">
                   </li>
@@ -163,7 +164,7 @@
           </c:forEach>
         </ul>
         <br>
-        <c:forEach var="allfood" items="${foods}" varStatus="varstatus">
+        <c:forEach var="allfood" items="${foods.list}" varStatus="varstatus">
           <c:if test="${allfood.fid!=null}">
           <div class="col-sm-6 col-md-2">
             <div class="thumbnail" style="height: 220px">
@@ -187,6 +188,18 @@
           </div>
           </c:if>
         </c:forEach>
+
+       <div style="text-align: center;margin-top: 500px">
+        <ul class="pagination">
+          <li><a href="${pageContext.request.contextPath}/food/allfood?page=${foods.pageNum-1}&size=${foods.pageSize}">&laquo;</a></li>
+          <li><a href="${pageContext.request.contextPath}/food/allfood?page=1&size=${foods.pageSize}">首页</a></li>
+          <c:forEach begin="1" end="${foods.pages}" var="pagenum">
+            <li><a href="${pageContext.request.contextPath}/food/allfood?page=${pagenum}&size=${foods.pageSize}">${pagenum}</a></li>
+          </c:forEach>
+          <li><a href="${pageContext.request.contextPath}/food/allfood?page=${foods.pages}&size=${foods.pageSize}">尾页</a></li>
+          <li><a href="${pageContext.request.contextPath}/food/allfood?page=${foods.pageNum+1}&size=${foods.pageSize}">&raquo;</a></li>
+        </ul>
+       </div>
 
       </div>
     </div>

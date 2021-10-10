@@ -15,4 +15,19 @@
     <select id="getusernamebyuid" resultType="String">
         select username from user where uid=#{uid}
     </select>
+    <update id="updateusername" parameterType="Map">
+        update user set username=#{username} where uid=#{uid}
+    </update>
+    <update id="updategonggao" parameterType="Map">
+        update user set gonggao=#{gonggao} where uid=#{uid}
+    </update>
+    <select id="getgonggaobyuid" resultType="String">
+        select gonggao from user where uid=#{uid}
+    </select>
+    <update id="updatezhuyemessage" parameterType="Map">
+        update user set zhuyemessage=#{zhuyemessage} where uid=#{uid}
+    </update>
+    <select id="getzhuyemessage" resultType="String">
+        select zhuyemessage from user where uid=#{uid}
+    </select>
 </mapper>

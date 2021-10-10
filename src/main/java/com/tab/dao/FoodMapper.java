@@ -3,6 +3,7 @@ package com.tab.dao;
 import com.tab.pojo.Category;
 import com.tab.pojo.Commentary;
 import com.tab.pojo.Food;
+import com.tab.pojo.User;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public interface FoodMapper {
     public List<Food> queryFoodBysearch(String search);
     public List<Commentary> querycommentarysByFid(int fid);
     public int Addcommentary(Commentary commentary);
+    public List<User> queryusersbyserch(String serch);
 
 
 }

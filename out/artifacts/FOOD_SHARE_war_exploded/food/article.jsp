@@ -2,7 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>爱美食</title>
+    <link rel="icon" href="/foodimages/tubiao1.png" type="image/x-icon"/>
 <%--    <script type="text/javascript">--%>
 <%--        function a() {--%>
 <%--            <%--%>
@@ -24,7 +25,8 @@
 
         </div>
         <span style="margin-top: 10px">${username}</span>
-        <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
+        <div style="color: #8a8a8a;text-align: center;line-height: 36px;font-size: 13px">
+            <span>${food.address}  </span>
 
             <span>${food.time}</span>
         </div>

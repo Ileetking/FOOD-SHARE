@@ -20,4 +20,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateuserimage(hashMap);
     }
     public String getusernamebyuid(int uid) {return userMapper.getusernamebyuid(uid);}
+    public int updateusername(HashMap hashMap) { return userMapper.updateusername(hashMap);}
+    public int updategonggao(HashMap hashMap) { return userMapper.updategonggao(hashMap); }
+    public String getgonggaobyuid(int uid) { return userMapper.getgonggaobyuid(uid);}
+    public int updatezhuyemessage(HashMap hashMap) { return userMapper.updatezhuyemessage(hashMap); }
+    public String getzhuyemessage(int uid) { return userMapper.getzhuyemessage(uid); }
+
 }

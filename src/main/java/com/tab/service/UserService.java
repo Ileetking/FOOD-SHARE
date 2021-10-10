@@ -10,4 +10,10 @@ public interface UserService {
     User getuser(String username);
     int updateuserimage(HashMap hashMap);
     String getusernamebyuid(int uid);
+    int updateusername(HashMap hashMap);
+    int updategonggao(HashMap hashMap);
+    String getgonggaobyuid(int uid);
+    int updatezhuyemessage(HashMap hashMap);
+    String getzhuyemessage(int uid);
+
 }

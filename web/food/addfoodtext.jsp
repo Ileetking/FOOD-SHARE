@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>上传图片</title>
+    <link rel="icon" href="/foodimages/tubiao1.png" type="image/x-icon"/>
     <script src="/HandyEditor.min.js"></script>
     <script>
         var he = HE.getEditor('editor', {

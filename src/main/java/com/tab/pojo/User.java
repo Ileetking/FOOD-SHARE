@@ -12,5 +12,8 @@ public class User {
     private String username;
     private String password;
     private String uimage;
+    private String gonggao;
+    private String zhuyemessage;
+
 
 }

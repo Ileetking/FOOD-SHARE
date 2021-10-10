@@ -1,15 +1,17 @@
 package com.tab.service;
 
+import com.github.pagehelper.PageHelper;
 import com.tab.dao.FoodMapper;
+import com.tab.dao.UserMapper;
 import com.tab.pojo.Category;
 import com.tab.pojo.Commentary;
 import com.tab.pojo.Food;
+import com.tab.pojo.User;
 
 import java.util.List;
 
 public class FoodServiceImpl implements FoodService{
     public FoodMapper foodMapper;
-
     public void setFoodMapper(FoodMapper foodMapper) {
         this.foodMapper = foodMapper;
     }
@@ -26,11 +28,13 @@ public class FoodServiceImpl implements FoodService{
         return foodMapper.deleteFood(fid);
     }
 
-    public List<Food> queryFood() {
+    public List<Food> queryFood(int page,int size) {
+        PageHelper.startPage(page,size);
         return foodMapper.queryFood();
     }
 
-    public List<Food> queryFoodById(int uid) {
+    public List<Food> queryFoodById(int uid,int page,int size) {
+        PageHelper.startPage(page,size);
         return foodMapper.queryFoodById(uid);
     }
 
@@ -50,7 +54,8 @@ public class FoodServiceImpl implements FoodService{
         return foodMapper.queryUsernameByUid(uid);
     }
 
-    public List<Food> queryFoodByCid(int cid) {
+    public List<Food> queryFoodByCid(int cid,int page,int size) {
+        PageHelper.startPage(page,size);
         return foodMapper.queryFoodByCid(cid);
     }
 
@@ -64,5 +69,8 @@ public class FoodServiceImpl implements FoodService{
     public int Addcommentary(Commentary commentary) {
         return foodMapper.Addcommentary(commentary);
     }
+
+    public List<User> queryusersbyserch(String search) {
+        return foodMapper.queryusersbyserch(search); }
 
 }

@@ -11,6 +11,11 @@ public interface UserMapper {
     User getuser(String usernmae);
     int updateuserimage(HashMap hashMap);
     public String getusernamebyuid(int uid);
+    public int updateusername(HashMap hashMap);
+    public int updategonggao(HashMap hashMap);
+    public String getgonggaobyuid(int uid);
+    public int updatezhuyemessage(HashMap hashMap);
+    public String getzhuyemessage(int uid);
 
 
 }
