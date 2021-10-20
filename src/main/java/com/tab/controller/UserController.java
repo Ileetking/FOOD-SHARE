@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -143,8 +144,14 @@ public class UserController {
                               @RequestParam(name = "size",required = true,defaultValue = "16")int size){
         String username=userService.getusernamebyuid(uid);
         List<Food> userfoods=foodService.queryFoodById(uid,page,size);
+        List<Integer> liulans=new ArrayList<Integer>();
+        for (Food userfood : userfoods) {
+            liulans.add(userService.getliulanbyfid(userfood.getFid()).size());
+        }
+        model.addAttribute("userliulan",liulans);
         PageInfo pageInfo=new PageInfo(userfoods);
         model.addAttribute("userimage",userService.getuser(username).getUimage());
+
         if(userService.getgonggaobyuid(uid)==null){
             model.addAttribute("gonggao","暂无公告~~");
         }

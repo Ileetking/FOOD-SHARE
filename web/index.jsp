@@ -177,8 +177,9 @@
 
               <div style="width: 100%;height: 26px;margin-top: 30px;margin-bottom: 10px">
                 <img src="/foodimages/liulan.png"  style="width: 13px;height: 13px;margin-left: 8px"/>
-                <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 37px"/>
-                <p style="font-size: 13px;color: #666666;display: inline;margin-left: 3px">${allfood.time}</p>
+                <p style="font-size: 13px;color: #666666;display: inline;">${liulansize[varstatus.count-1]}</p>
+                <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 22px"/>
+                <p style="font-size: 13px;color: #666666;display: inline;margin-left:3px">${allfood.time}</p>
                 <img src="/foodimages/user.png" style="width: 13px;height: 13px;margin-left: 8px"/>
                 <a style="font-size: 13px;color: #666666;" href="${pageContext.request.contextPath}/user/usermessage/${allfood.uid}">${usernames[varstatus.count-1]}</a>
               </div>

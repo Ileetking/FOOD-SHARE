@@ -4,10 +4,7 @@ package com.tab.controller;
  */
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tab.pojo.Category;
-import com.tab.pojo.Commentary;
-import com.tab.pojo.Food;
-import com.tab.pojo.User;
+import com.tab.pojo.*;
 import com.tab.service.FoodService;
 import com.tab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,11 +91,13 @@ public class FoodController {
             List<Category> allname= foodService.queryAll();
             List<Food> foods=foodService.queryFood(page, size);
             List<String> usernames=new ArrayList<String>();
+           List<Integer> liulans=new ArrayList<Integer>();
         for (Food food : foods) {
             usernames.add(foodService.queryUsernameByUid(food.getUid()));
+            liulans.add(userService.getliulanbyfid(food.getFid()).size());
         }
         PageInfo pageInfo=new PageInfo(foods);
-
+            model.addAttribute("liulansize",liulans);
             model.addAttribute("usernames",usernames);
             model.addAttribute("allname1",allname);
             model.addAttribute("foods",pageInfo);
@@ -158,8 +157,9 @@ public class FoodController {
 
    }
    @RequestMapping("/commentaries/{fid}")
-    public String querycommentarysByFid(@PathVariable("fid") int fid,Model model){
+    public String querycommentarysByFid(@PathVariable("fid") int fid,Model model,HttpServletRequest request){
        Food food=foodService.queryFoodByFid(fid);
+       Liulan liulan=new Liulan();
        String username=foodService.queryUsernameByUid(food.getUid());
        model.addAttribute("food",food);
        model.addAttribute("userimage",userService.getuser(username).getUimage());
@@ -167,12 +167,23 @@ public class FoodController {
        List<Commentary> commentaries=foodService.querycommentarysByFid(fid);
        List<String> userimages=new ArrayList<String>();
        for (Commentary commentary : commentaries) {
-
 //           System.out.println("id为："+commentary.getUid());
 //           System.out.println("username为："+foodService.queryUsernameByUid(commentary.getUid()));
 //           System.out.println(userService.getuser(foodService.queryUsernameByUid(commentary.getUid())));
            userimages.add(commentary.getUser().getUimage());
        }
+       if(request.getSession().getAttribute("uid")==null){
+           liulan.setUid(21);
+           liulan.setFid(fid);
+           userService.addliulan(liulan);
+       }
+       else {
+           int uid=Integer.parseInt(request.getSession().getAttribute("uid").toString());
+           liulan.setUid(uid);
+           liulan.setFid(fid);
+           userService.addliulan(liulan);
+       }
+
             model.addAttribute("commentaries",commentaries);
             model.addAttribute("userimages",userimages);
             return "food/article";

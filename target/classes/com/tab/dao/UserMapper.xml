@@ -30,4 +30,21 @@
     <select id="getzhuyemessage" resultType="String">
         select zhuyemessage from user where uid=#{uid}
     </select>
+    <insert id="adddianzhang" parameterType="Dianzhang">
+        insert into dianzhang(uid,fid) value (#{uid},#{fid})
+    </insert>
+    <insert id="addshouchang" parameterType="Shouchang">
+        insert into shouchang(uid,fid) value (#{uid},#{fid})
+    </insert>
+    <insert id="addliulan" parameterType="Liulan">
+        insert into liulan(uid,fid) value (#{uid},#{fid})
+    </insert>
+    <delete id="removedianzhang" parameterType="int">
+        delete * from dianzhang where id=#{id}
+    </delete><delete id="removeshouchang" parameterType="int">
+        delete * from shouchang where id=#{id}
+    </delete>
+    <select id="getliulanbyfid" resultType="Liulan">
+        select * from Liulan where fid=#{fid}
+    </select>
 </mapper>

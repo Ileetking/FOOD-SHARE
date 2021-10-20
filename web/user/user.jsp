@@ -54,7 +54,8 @@
 
                     <div style="width: 100%;height: 26px;margin-top: 10px;margin-bottom: 10px">
                         <img src="/foodimages/liulan.png"  style="width: 13px;height: 13px;margin-left: 8px"/>
-                        <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 37px"/>
+                        <p style="font-size: 13px;color: #666666;display: inline;margin-left: 3px">${userliulan[varstatus.count-1]}</p>
+                        <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 22px"/>
                         <p style="font-size: 13px;color: #666666;display: inline;margin-left: 3px">${allfood.time}</p>
                     </div>
                 </div>

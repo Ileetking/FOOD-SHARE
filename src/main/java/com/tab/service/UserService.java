@@ -1,8 +1,12 @@
 package com.tab.service;
 
+import com.tab.pojo.Dianzhang;
+import com.tab.pojo.Liulan;
+import com.tab.pojo.Shouchang;
 import com.tab.pojo.User;
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface UserService {
 
@@ -15,5 +19,12 @@ public interface UserService {
     String getgonggaobyuid(int uid);
     int updatezhuyemessage(HashMap hashMap);
     String getzhuyemessage(int uid);
+    int adddianzhang(Dianzhang dianzhang);
+    int addshouchang(Shouchang shouchang);
+    int addliulan(Liulan liulan);
+    int removedianzhang(int id);
+    int removeshouchang(int id);
+    List<Liulan> getliulanbyfid(int fid);
+
 
 }
