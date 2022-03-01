@@ -50,7 +50,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="active">
-                <a href="#">首页</a>
+                <a href="/index1.jsp">首页</a>
               </li>
               <li>
                 <a href="#">附近</a>
