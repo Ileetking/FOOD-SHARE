@@ -4,6 +4,7 @@ package com.tab.controller;
  */
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.tab.pojo.*;
 import com.tab.service.FoodService;
 import com.tab.service.UserService;
@@ -166,10 +167,14 @@ public class FoodController {
        model.addAttribute("username",username);
        List<Commentary> commentaries=foodService.querycommentarysByFid(fid);
        List<String> userimages=new ArrayList<String>();
+       List<Dianzhang> dianzhangs=new ArrayList<Dianzhang>();
+       List<Shouchang> shouchangs=new ArrayList<Shouchang>();
+       List<Dianzhang> alldianzan=new ArrayList<Dianzhang>();
+       List<Shouchang> allshouchang=new ArrayList<Shouchang>();
+       List<Liulan> allliulan=new ArrayList<Liulan>();
        for (Commentary commentary : commentaries) {
 //           System.out.println("id为："+commentary.getUid());
-//           System.out.println("username为："+foodService.queryUsernameByUid(commentary.getUid()));
-//           System.out.println(userService.getuser(foodService.queryUsernameByUid(commentary.getUid())));
+//           System.out.println("username为：getuser(foodService.queryUsernameByUid(commentary.getUid())));
            userimages.add(commentary.getUser().getUimage());
        }
        if(request.getSession().getAttribute("uid")==null){
@@ -182,11 +187,68 @@ public class FoodController {
            liulan.setUid(uid);
            liulan.setFid(fid);
            userService.addliulan(liulan);
+            dianzhangs = foodService.queryDianzanby(uid, fid);
+            shouchangs =foodService.queryShouchangby(uid,fid);
        }
+       alldianzan=foodService.queryalldianzan(fid);
+       allshouchang=foodService.queryallshouchang(fid);
+       allliulan=foodService.allliulan(fid);
 
+         if(dianzhangs.size()>0){
+             model.addAttribute("dianzan",false);
+         }
+         else {
+             model.addAttribute("dianzan",true);
+         }
+       if(shouchangs.size()>0){
+           model.addAttribute("shouchang",false);
+       }
+       else {
+           model.addAttribute("shouchang",true);
+       }
             model.addAttribute("commentaries",commentaries);
             model.addAttribute("userimages",userimages);
+            model.addAttribute("alldianzan",alldianzan.size());
+            model.addAttribute("allshouchang",allshouchang.size());
+            model.addAttribute("allliulan",allliulan.size());
+
             return "food/article";
     }
+    @RequestMapping("/islogin")
+    public String tologin(){
+        return "user/login";
+
+    }
+   @RequestMapping("/isdianzan")
+    public String isdianzan(boolean dianzan ,Dianzhang dianzhang,int uid,int fid,Model model){
+//        if(uid==0){
+//            return "user/login";
+//        }
+//        else {
+            if(!dianzan){
+                foodService.dianzan(dianzhang);
+            }
+            else {
+                foodService.chanledianzan(uid,fid);
+            }
+            model.addAttribute("fid",fid);
+//        System.out.println("uid::"+uid);
+           return "food/article2";
+    }
+
+    @RequestMapping("/isshouchang")
+    public String isshouchang(boolean shouchang , Shouchang shouchangs, int uid, int fid, Model model){
+        if(!shouchang){
+            foodService.shouchang(shouchangs);
+        }
+        else {
+            foodService.chanleshouchang(uid,fid);
+        }
+        model.addAttribute("fid",fid);
+//        System.out.println("uid::"+uid);
+        return "food/article2";
+
+    }
+
 
 }

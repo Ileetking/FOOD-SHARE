@@ -48,5 +48,32 @@
     <select id="queryusersbyserch" resultType="User">
         select * from user where username like concat('%',#{search},'%')
     </select>
+    <insert id="dianzan" parameterType="Dianzhang">
+        insert into dianzhang(uid,fid) value (#{uid},#{fid})
+    </insert>
+    <delete id="chanledianzan" parameterType="int">
+        delete from dianzhang where uid=#{arg0} and fid=#{arg1}
+    </delete>
+    <select id="queryDianzanby" resultType="Dianzhang">
+        select * from dianzhang where uid=#{arg0} and fid=#{arg1}
+    </select>
+   <select id="queryalldianzan" resultType="Dianzhang">
+       select * from dianzhang where fid=#{fid};
+   </select>
+    <insert id="shouchang" parameterType="Shouchang">
+        insert into shouchang(uid,fid) value (#{uid},#{fid})
+    </insert>
+    <delete id="chanleshouchang" parameterType="int">
+        delete from shouchang where uid=#{arg0} and fid=#{arg1}
+    </delete>
+    <select id="queryShouchangby" resultType="Shouchang">
+        select * from shouchang where uid=#{arg0} and fid=#{arg1}
+    </select>
+    <select id="queryallshouchang" resultType="Shouchang">
+        select * from shouchang where fid=#{fid}
+    </select>
+    <select id="allliulan" resultType="Liulan">
+        select * from liulan where fid=#{fid}
+    </select>
 
 </mapper>

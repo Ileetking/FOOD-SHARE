@@ -3,10 +3,7 @@ package com.tab.service;
 import com.github.pagehelper.PageHelper;
 import com.tab.dao.FoodMapper;
 import com.tab.dao.UserMapper;
-import com.tab.pojo.Category;
-import com.tab.pojo.Commentary;
-import com.tab.pojo.Food;
-import com.tab.pojo.User;
+import com.tab.pojo.*;
 
 import java.util.List;
 
@@ -72,5 +69,42 @@ public class FoodServiceImpl implements FoodService{
 
     public List<User> queryusersbyserch(String search) {
         return foodMapper.queryusersbyserch(search); }
+
+    public int dianzan(Dianzhang dianzhang) {
+        return foodMapper.dianzan(dianzhang);
+    }
+
+    public List<Dianzhang> queryDianzanby(int uid, int fid) {
+        return foodMapper.queryDianzanby(uid,fid);
+    }
+
+    public int chanledianzan(int uid, int fid) {
+        return foodMapper.chanledianzan(uid,fid);
+    }
+
+    public int shouchang(Shouchang shouchang) {
+        return foodMapper.shouchang(shouchang);
+    }
+
+    public List<Shouchang> queryShouchangby(int uid, int fid) {
+        return foodMapper.queryShouchangby(uid,fid);
+    }
+
+    public int chanleshouchang(int uid, int fid) {
+        return foodMapper.chanleshouchang(uid,fid);
+    }
+
+    public List<Dianzhang> queryalldianzan(int fid) {
+        return foodMapper.queryalldianzan(fid);
+    }
+
+    public List<Shouchang> queryallshouchang(int fid) {
+        return foodMapper.queryallshouchang(fid);
+    }
+
+    public List<Liulan> allliulan(int fid) {
+        return foodMapper.allliulan(fid);
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package com.tab.dao;
 
-import com.tab.pojo.Category;
-import com.tab.pojo.Commentary;
-import com.tab.pojo.Food;
-import com.tab.pojo.User;
+import com.tab.pojo.*;
 
 import java.util.List;
 
@@ -22,6 +19,15 @@ public interface FoodMapper {
     public List<Commentary> querycommentarysByFid(int fid);
     public int Addcommentary(Commentary commentary);
     public List<User> queryusersbyserch(String serch);
+    public int dianzan(Dianzhang dianzhang);
+    public List<Dianzhang> queryDianzanby(int uid,int fid);
+    public int chanledianzan(int uid,int fid);
+    public List<Dianzhang> queryalldianzan(int fid);
+    public List<Shouchang> queryallshouchang(int fid);
+    public int shouchang(Shouchang shouchang);
+    public List<Shouchang> queryShouchangby(int uid,int fid);
+    public int chanleshouchang(int uid,int fid);
+    public List<Liulan> allliulan(int fid);
 
 
 }

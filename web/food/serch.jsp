@@ -7,7 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<p>
+<html>
 <head>
     <title>愛美食|搜索</title>
     <link rel="icon" href="/foodimages/tubiao1.png" type="image/x-icon"/>
@@ -19,6 +19,7 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
     <style>
         .test{
             position: fixed;
@@ -38,6 +39,7 @@
 
     </style>
 </head>
+<body>
 <div style="background: #fafafa">
 <div class="test">
     <nav class="navbar navbar-default" role="navigation">

@@ -15,12 +15,16 @@
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">--%>
+<%--    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
    <style>
      a{
        color: #323534;
@@ -178,7 +182,7 @@
               <div style="width: 100%;height: 26px;margin-top: 30px;margin-bottom: 10px">
                 <img src="/foodimages/liulan.png"  style="width: 13px;height: 13px;margin-left: 8px"/>
                 <p style="font-size: 13px;color: #666666;display: inline;">${liulansize[varstatus.count-1]}</p>
-                <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 22px"/>
+                <img src="/foodimages/date.png" style="width: 13px;height: 13px;margin-left: 12px"/>
                 <p style="font-size: 13px;color: #666666;display: inline;margin-left:3px">${allfood.time}</p>
                 <img src="/foodimages/user.png" style="width: 13px;height: 13px;margin-left: 8px"/>
                 <a style="font-size: 13px;color: #666666;" href="${pageContext.request.contextPath}/user/usermessage/${allfood.uid}">${usernames[varstatus.count-1]}</a>
