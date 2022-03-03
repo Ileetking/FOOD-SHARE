@@ -42,8 +42,9 @@ public class UserController {
         return "user/resgiter";
     }
     @RequestMapping("/register")
-    public String adduser(User user,Model model){
+    public String adduser(User user,Model model,String confpassword,String verification,String codeu){
         System.out.println(user);
+        System.out.println("con::"+verification+"code:"+codeu);
         String username=user.getUsername();
         if(user.getUsername().equals("")){
             model.addAttribute("errormsg","用户名不能为空!!");
@@ -53,8 +54,20 @@ public class UserController {
             model.addAttribute("errormsg","密码不能为空!!");
             return "user/resgiter";
         }
+        if(verification.equals("")){
+            model.addAttribute("errormsg","验证码不能为空!!");
+            return "user/resgiter";
+        }
         if(user.getPassword().length()<5){
             model.addAttribute("errormsg","密码长度不能小于5位~~");
+            return "user/resgiter";
+        }
+        if(!user.getPassword().equals(confpassword)){
+            model.addAttribute("errormsg","两次密码输入不一致");
+            return "user/resgiter";
+        }
+        if(!verification.toUpperCase().equals(codeu.toUpperCase())){
+            model.addAttribute("errormsg","验证码错误，请重新输入!!");
             return "user/resgiter";
         }
          if(userService.getuser(username)!=null){
