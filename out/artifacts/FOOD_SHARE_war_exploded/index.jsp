@@ -196,13 +196,13 @@
 
        <div style="text-align: center;margin-top: 500px">
         <ul class="pagination">
-          <li><a href="${pageContext.request.contextPath}/food/allfood?page=${foods.pageNum-1}&size=${foods.pageSize}">&laquo;</a></li>
-          <li><a href="${pageContext.request.contextPath}/food/allfood?page=1&size=${foods.pageSize}">首页</a></li>
+          <li><a href="${pageContext.request.contextPath}/food/allfoodbycity1?page=${foods.pageNum-1}&size=${foods.pageSize}">&laquo;</a></li>
+          <li><a href="${pageContext.request.contextPath}/food/allfoodbycity1?page=1&size=${foods.pageSize}">首页</a></li>
           <c:forEach begin="1" end="${foods.pages}" var="pagenum">
-            <li><a href="${pageContext.request.contextPath}/food/allfood?page=${pagenum}&size=${foods.pageSize}">${pagenum}</a></li>
+            <li><a href="${pageContext.request.contextPath}/food/allfoodbycity1?page=${pagenum}&size=${foods.pageSize}">${pagenum}</a></li>
           </c:forEach>
-          <li><a href="${pageContext.request.contextPath}/food/allfood?page=${foods.pages}&size=${foods.pageSize}">尾页</a></li>
-          <li><a href="${pageContext.request.contextPath}/food/allfood?page=${foods.pageNum+1}&size=${foods.pageSize}">&raquo;</a></li>
+          <li><a href="${pageContext.request.contextPath}/food/allfoodbycity1?page=${foods.pages}&size=${foods.pageSize}">尾页</a></li>
+          <li><a href="${pageContext.request.contextPath}/food/allfoodbycity1?page=${foods.pageNum+1}&size=${foods.pageSize}">&raquo;</a></li>
         </ul>
        </div>
 
