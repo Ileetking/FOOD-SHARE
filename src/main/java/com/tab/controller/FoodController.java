@@ -106,7 +106,7 @@ public class FoodController {
         return "index";
     }
 
-    @RequestMapping("/allfoodbycity")
+    @RequestMapping("/allfoodbycity1")
     public String allfoodbycity(Model model,
                           @RequestParam(name = "page",required = true,defaultValue = "1")int page,
                           @RequestParam(name = "size",required = true,defaultValue = "18")int size) throws IOException {
