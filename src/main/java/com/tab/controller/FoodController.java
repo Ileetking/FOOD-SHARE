@@ -308,8 +308,16 @@ public class FoodController {
 
     }
 
+    @RequestMapping("/tobainji")
+    public String tobianji(){
+         
+        return "/food/addfood";
+    }
+
+
     @RequestMapping("/bainji")
     public String bianji(){
+
      return "";
     }
 

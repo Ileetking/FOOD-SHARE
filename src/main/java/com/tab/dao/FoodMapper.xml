@@ -87,6 +87,7 @@
     <select id="queryfoodbypinglun" resultType="Food">
         select * from food where fid in (select fid from commentary where uid=#{uid})
     </select>
-
-
+    <update id="updateFood" parameterType="Map">
+        update food set title=#{title} and description=#{description} and img=#{img} and article=#{article}
+    </update>
 </mapper>

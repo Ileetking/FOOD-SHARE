@@ -2,6 +2,7 @@ package com.tab.service;
 
 import com.tab.pojo.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface FoodService {
@@ -32,4 +33,5 @@ public interface FoodService {
     public List<Food> queryfoodbydianzan(int uid,int page,int size);
     public List<Food> queryfoodbyshouchang(int uid,int page,int size);
     public List<Food> queryfoodbypinglun(int uid,int page,int size);
+    public int updateFood(HashMap hashMap);
 }

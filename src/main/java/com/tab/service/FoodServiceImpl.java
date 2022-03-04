@@ -5,6 +5,7 @@ import com.tab.dao.FoodMapper;
 import com.tab.dao.UserMapper;
 import com.tab.pojo.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FoodServiceImpl implements FoodService{
@@ -123,6 +124,10 @@ public class FoodServiceImpl implements FoodService{
     public List<Food> queryfoodbypinglun(int uid,int page,int size) {
         PageHelper.startPage(page,size);
         return foodMapper.queryfoodbypinglun(uid);
+    }
+
+    public int updateFood(HashMap hashMap) {
+        return foodMapper.updateFood(hashMap);
     }
 
 }

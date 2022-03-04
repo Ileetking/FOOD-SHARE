@@ -2,6 +2,7 @@ package com.tab.dao;
 
 import com.tab.pojo.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface FoodMapper {
@@ -32,6 +33,7 @@ public interface FoodMapper {
     public List<Food> queryfoodbydianzan(int uid);
     public List<Food> queryfoodbyshouchang(int uid);
     public List<Food> queryfoodbypinglun(int uid);
+    public int updateFood(HashMap hashMap);
 
 
 }
