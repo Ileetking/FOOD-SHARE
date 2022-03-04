@@ -23,10 +23,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 @Controller
 @RequestMapping("/food")
 public class FoodController {
@@ -308,18 +306,66 @@ public class FoodController {
 
     }
 
-    @RequestMapping("/tobainji")
-    public String tobianji(){
-         
-        return "/food/addfood";
+    @RequestMapping("/tobainji/{fid}")
+    public String tobianji(@PathVariable("fid") int fid,Model model){
+         Food foods=foodService.queryFoodByFid(fid);
+        List<Category> allname= foodService.queryAll();
+        model.addAttribute("allname",allname);
+         model.addAttribute("title",foods.getTitle());
+         model.addAttribute("description",foods.getDescription());
+         model.addAttribute("img",foods.getImg());
+         model.addAttribute("artile",foods.getArticle());
+        return "/food/updatefood";
     }
 
 
     @RequestMapping("/bainji")
-    public String bianji(){
+    public String bianji(Food food, MultipartFile file,HttpSession session) throws IOException {
+        // 保存图片的路径，图片上传成功后，将路径保存到数据库
+        String filePath = "D:\\FoodImages\\foodimage";
+        File file1=new File(filePath);
+        if(!file1.exists()){
+            file1.mkdir();
+        }
+        // 获取原始图片的扩展名
+        System.out.println("开始结果：");
+        //System.out.println("article为："+article);
+        String originalFilename = file.getOriginalFilename();
 
-     return "";
+        System.out.println(originalFilename);
+        // 生成文件新的名字
+        String newFileName = UUID.randomUUID() + originalFilename;
+        System.out.println(newFileName);
+        // 封装上传文件位置的全路径
+        File targetFile = new File(filePath, newFileName);
+        System.out.println(targetFile);
+        //file.transferTo(targetFile);
+        Date date=new Date();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        String datime=format.format(date);
+        System.out.println(date);
+
+        System.out.println("cid为："+food.getCid());
+        //System.out.println(Integer.parseInt(cid));
+        // 保存到数据库
+        food.setTime(datime);
+        //food.setCid(Integer.parseInt(cid));
+        file.transferTo(targetFile);
+        food.setImg(newFileName);
+        String address= (String) session.getAttribute("address");
+        food.setAddress(address);
+        HashMap<String,Object> hashMap=new HashMap<String, Object>();
+        hashMap.put("title",food.getTitle());
+        hashMap.put("description",food.getDescription());
+        hashMap.put("img",food.getImg());
+        hashMap.put("acticle",food.getArticle());
+        hashMap.put("time",food.getTime());
+        hashMap.put("cid",food.getCid());
+        hashMap.put("address",food.getAddress());
+        foodService.updateFood(hashMap);
+        return "redirect:/food/allfood";
     }
 
 
 }
+
