@@ -22,7 +22,7 @@
         select username from user where uid=#{uid}
     </select>
     <select id="queryFoodByCid" resultType="Food">
-        select * from food where cid=#{cid}
+        select * from food where cid=#{arg0} and address like concat('%',#{arg1},'%')
     </select>
     <select id="queryFoodBysearch" resultType="Food">
         select * from food where title like concat('%',#{search},'%')
@@ -75,5 +75,16 @@
     <select id="allliulan" resultType="Liulan">
         select * from liulan where fid=#{fid}
     </select>
-
+    <select id="queryfoodbycity" resultType="Food">
+        select * from food where address like concat('%',#{address},'%')
+    </select>
+    <select id="queryfoodbydianzan" resultType="Food">
+        select * from food where fid in (select fid from dianzhang where uid=#{uid})
+    </select>
+    <select id="queryfoodbyshouchang" resultType="Food">
+        select * from food where fid in (select fid from shouchang where uid=#{uid})
+    </select>
+    <select id="queryfoodbypinglun" resultType="Food">
+        select * from food where fid in (select fid from commentary where uid=#{uid})
+    </select>
 </mapper>

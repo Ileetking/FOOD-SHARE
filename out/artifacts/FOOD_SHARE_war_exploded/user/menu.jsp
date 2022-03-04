@@ -33,7 +33,7 @@
 <body>
             <ul class="nav navbar-nav">
                 <li><a href="/user/updateusernane.jsp" target="zhuye"><h5 style="margin-left: 50px">修改昵称</h5></a></li>
-                <li class="active"><a href="#"><h5 style="margin-left: 50px">美食管理</h5></a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/user/useradmin/<%=request.getSession().getAttribute("uid")%>" target="zhuye"><h5 style="margin-left: 50px">美食管理</h5></a></li>
                 <li><a href="/user/gonggao.jsp" target="zhuye"><h5 style="margin-left: 50px">发布公告</h5></a></li>
                 <li><a href="/user/zhuyemessage.jsp" target="zhuye"><h5 style="margin-left: 50px">更新主页描述</h5></a></li>
             </ul>

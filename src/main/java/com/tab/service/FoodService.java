@@ -14,7 +14,7 @@ public interface FoodService {
     public List<Category> queryAll();
     public Food queryFoodByFid(int fid);
     public String queryUsernameByUid(int uid);
-    public List<Food> queryFoodByCid(int cid,int page,int size);
+    public List<Food> queryFoodByCid(int cid,String city,int page,int size);
     public List<Food> queryFoodBysearch(String search);
     public List<Commentary> querycommentarysByFid(int fid);
     public int Addcommentary(Commentary commentary);
@@ -28,4 +28,8 @@ public interface FoodService {
     public List<Dianzhang> queryalldianzan(int fid);
     public List<Shouchang> queryallshouchang(int fid);
     public List<Liulan> allliulan(int fid);
+    public List<Food> queryfoodbycity(String address);
+    public List<Food> queryfoodbydianzan(int uid,int page,int size);
+    public List<Food> queryfoodbyshouchang(int uid,int page,int size);
+    public List<Food> queryfoodbypinglun(int uid,int page,int size);
 }

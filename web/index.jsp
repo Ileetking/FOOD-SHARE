@@ -53,19 +53,19 @@
                 <a href="/index1.jsp">首页</a>
               </li>
               <li>
-                <a href="#">附近</a>
+                <a href="/user/tofujing">附近</a>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的<strong class="caret"></strong></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">我的收藏</a>
+                    <a href="${pageContext.request.contextPath}/user/usershouchang/<%if(request.getSession().getAttribute("uid")==null)out.print(0);else out.print(request.getSession().getAttribute("uid"));%>">我的收藏</a>
                   </li>
                   <li>
-                    <a href="#">我的点赞</a>
+                    <a href="${pageContext.request.contextPath}/user/userdianzan/<%if(request.getSession().getAttribute("uid")==null)out.print(0);else out.print(request.getSession().getAttribute("uid"));%>">我的点赞</a>
                   </li>
                   <li>
-                    <a href="#">我的评论</a>
+                    <a href="${pageContext.request.contextPath}/user/userpinlun/<%if(request.getSession().getAttribute("uid")==null)out.print(0);else out.print(request.getSession().getAttribute("uid"));%>">我的评论</a>
                   </li>
                   <li class="divider">
                   </li>

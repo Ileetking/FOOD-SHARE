@@ -51,9 +51,9 @@ public class FoodServiceImpl implements FoodService{
         return foodMapper.queryUsernameByUid(uid);
     }
 
-    public List<Food> queryFoodByCid(int cid,int page,int size) {
+    public List<Food> queryFoodByCid(int cid,String city,int page,int size) {
         PageHelper.startPage(page,size);
-        return foodMapper.queryFoodByCid(cid);
+        return foodMapper.queryFoodByCid(cid,city);
     }
 
     public List<Food> queryFoodBysearch(String search) {
@@ -106,5 +106,23 @@ public class FoodServiceImpl implements FoodService{
         return foodMapper.allliulan(fid);
     }
 
+    public List<Food> queryfoodbycity(String address) {
+        return foodMapper.queryfoodbycity(address);
+    }
+
+    public List<Food> queryfoodbydianzan(int uid,int page,int size) {
+        PageHelper.startPage(page,size);
+        return foodMapper.queryfoodbydianzan(uid);
+    }
+
+    public List<Food> queryfoodbyshouchang(int uid,int page,int size) {
+        PageHelper.startPage(page,size);
+        return foodMapper.queryfoodbyshouchang(uid);
+    }
+
+    public List<Food> queryfoodbypinglun(int uid,int page,int size) {
+        PageHelper.startPage(page,size);
+        return foodMapper.queryfoodbypinglun(uid);
+    }
 
 }

@@ -83,11 +83,20 @@ public class UserController {
         return "user/login";
     }
     @RequestMapping("/login")
-    public String login(String username, String password, HttpSession httpSession, Model model) throws Exception {
+    public String login(String username, String password, HttpSession httpSession,String verification,String codeu) throws Exception {
 //        httpSession.removeAttribute("loginmsg");
+        System.out.println("ver:"+verification+"co:"+codeu);
          if(userService.getuser(username)!=null){
              if(password.equals("")) {
                  httpSession.setAttribute("loginmsg","密码不能为空！");
+                 return "user/login";
+             }
+             else if(verification.equals("")){
+                 httpSession.setAttribute("loginmsg","验证码不能为空!!");
+                 return "user/login";
+             }
+             else if(!verification.toUpperCase().equals(codeu.toUpperCase())){
+                 httpSession.setAttribute("loginmsg","验证码错误，请重新输入!!");
                  return "user/login";
              }
             else if(userService.getuser(username).getPassword().equals(password)){
@@ -96,10 +105,10 @@ public class UserController {
                  IpUtil getlocalip=new IpUtil();
 //            System.out.println("当前的本地ip地址为："+IpUtil.getIpAddress(request));
 //            System.out.println("当前的局域网ip地址为："+getlocalip.getLocalHostIP());
-                 System.out.println("当前的地理地址为："+getlocalip.getipjson(IpUtil.getV4IP()));
+                 System.out.println("当前的地理地址为："+getlocalip.getipjson(getlocalip.getV4IP()));
                  httpSession.setAttribute("uid",userService.getuser(username).getUid());
                  httpSession.setAttribute("uimage",userService.getuser(username).getUimage());
-                 httpSession.setAttribute("address",getlocalip.getipjson(IpUtil.getV4IP()));
+                 httpSession.setAttribute("address",getlocalip.getipjson(getlocalip.getV4IP()));
                  return "index1";
              }
              else
@@ -116,6 +125,14 @@ public class UserController {
          }
          else if(password.equals("")) {
              httpSession.setAttribute("loginmsg","密码不能为空！");
+             return "user/login";
+         }
+         else if(verification.equals("")){
+             httpSession.setAttribute("loginmsg","验证码不能为空!!");
+             return "user/login";
+         }
+         else if(!verification.toUpperCase().equals(codeu.toUpperCase())){
+             httpSession.setAttribute("loginmsg","验证码错误，请重新输入!!");
              return "user/login";
          }
          else{
@@ -183,6 +200,117 @@ public class UserController {
         model.addAttribute("userfoods",pageInfo);
         return "user/user";
     }
+    @RequestMapping("touserdianzan")
+    public String touserdianzan(HttpServletRequest request){
+        if(request.getSession().getAttribute("username")!=null){
+            return "user/userdianzan";
+        }
+        return "user/login";
+    }
+    @RequestMapping("/userdianzan/{uid}")
+    public String userdianzan(@PathVariable("uid")int uid, Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                              @RequestParam(name = "size",required = true,defaultValue = "16")int size){
+        if(uid==0){
+            return "user/loginerror";
+        }
+        String username=userService.getusernamebyuid(uid);
+        List<Food> userfoods=foodService.queryfoodbydianzan(uid,page,size);
+        List<Integer> liulans=new ArrayList<Integer>();
+        for (Food userfood : userfoods) {
+            liulans.add(userService.getliulanbyfid(userfood.getFid()).size());
+        }
+        model.addAttribute("userliulan",liulans);
+        PageInfo pageInfo=new PageInfo(userfoods);
+        model.addAttribute("userimage",userService.getuser(username).getUimage());
+
+        if(userService.getgonggaobyuid(uid)==null){
+            model.addAttribute("gonggao","暂无公告~~");
+        }
+        else {
+            String gonggao = userService.getgonggaobyuid(uid);
+            model.addAttribute("gonggao",gonggao);
+        }
+        if(userService.getzhuyemessage(uid)==null){
+            model.addAttribute("zhuyemessage","暂无描述~~");
+        }
+        else {
+            String zhuyemessage = userService.getzhuyemessage(uid);
+            model.addAttribute("zhuyemessage",zhuyemessage);
+        }
+        model.addAttribute("username",username);
+        model.addAttribute("userfoods",pageInfo);
+        return "user/userdianzan";
+    }
+
+    @RequestMapping("/usershouchang/{uid}")
+    public String usershouchang(@PathVariable("uid")int uid, Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                              @RequestParam(name = "size",required = true,defaultValue = "16")int size){
+        if(uid==0){
+            return "user/loginerror";
+        }
+        String username=userService.getusernamebyuid(uid);
+        List<Food> userfoods=foodService.queryfoodbyshouchang(uid,page,size);
+        List<Integer> liulans=new ArrayList<Integer>();
+        for (Food userfood : userfoods) {
+            liulans.add(userService.getliulanbyfid(userfood.getFid()).size());
+        }
+        model.addAttribute("userliulan",liulans);
+        PageInfo pageInfo=new PageInfo(userfoods);
+        model.addAttribute("userimage",userService.getuser(username).getUimage());
+
+        if(userService.getgonggaobyuid(uid)==null){
+            model.addAttribute("gonggao","暂无公告~~");
+        }
+        else {
+            String gonggao = userService.getgonggaobyuid(uid);
+            model.addAttribute("gonggao",gonggao);
+        }
+        if(userService.getzhuyemessage(uid)==null){
+            model.addAttribute("zhuyemessage","暂无描述~~");
+        }
+        else {
+            String zhuyemessage = userService.getzhuyemessage(uid);
+            model.addAttribute("zhuyemessage",zhuyemessage);
+        }
+        model.addAttribute("username",username);
+        model.addAttribute("userfoods",pageInfo);
+        return "user/usershouchang";
+    }
+
+    @RequestMapping("/userpinlun/{uid}")
+    public String userpinlun(@PathVariable("uid")int uid, Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                                @RequestParam(name = "size",required = true,defaultValue = "16")int size){
+        if(uid==0){
+            return "user/loginerror";
+        }
+        String username=userService.getusernamebyuid(uid);
+        List<Food> userfoods=foodService.queryfoodbypinglun(uid,page,size);
+        List<Integer> liulans=new ArrayList<Integer>();
+        for (Food userfood : userfoods) {
+            liulans.add(userService.getliulanbyfid(userfood.getFid()).size());
+        }
+        model.addAttribute("userliulan",liulans);
+        PageInfo pageInfo=new PageInfo(userfoods);
+        model.addAttribute("userimage",userService.getuser(username).getUimage());
+
+        if(userService.getgonggaobyuid(uid)==null){
+            model.addAttribute("gonggao","暂无公告~~");
+        }
+        else {
+            String gonggao = userService.getgonggaobyuid(uid);
+            model.addAttribute("gonggao",gonggao);
+        }
+        if(userService.getzhuyemessage(uid)==null){
+            model.addAttribute("zhuyemessage","暂无描述~~");
+        }
+        else {
+            String zhuyemessage = userService.getzhuyemessage(uid);
+            model.addAttribute("zhuyemessage",zhuyemessage);
+        }
+        model.addAttribute("username",username);
+        model.addAttribute("userfoods",pageInfo);
+        return "user/usershouchang";
+    }
     @RequestMapping("/updatename/{uid}")
     public String updatename(@PathVariable("uid")int uid,String username){
         if(userService.getusernamebyuid(uid).equals(username)){
@@ -216,6 +344,31 @@ public class UserController {
         hashMap.put("uid",uid);
         userService.updatezhuyemessage(hashMap);
         return "user/successmessage";
+    }
+    @RequestMapping("/tofujing")
+    public String tofujing(HttpServletRequest request){
+        if(request.getSession().getAttribute("username")!=null){
+            return "index3";
+        }
+        return "user/login";
+    }
+    @RequestMapping("useradmin/{uid}")
+    public String useradmin(@PathVariable("uid")int uid,Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                            @RequestParam(name = "size",required = true,defaultValue = "16")int size){
+        List<Food> foods=new ArrayList<Food>();
+        List<String> usernames=new ArrayList<String>();
+        List<Integer> liulans=new ArrayList<Integer>();
+        foods=foodService.queryFoodById(uid,page,size);
+        for (Food food : foods) {
+            usernames.add(foodService.queryUsernameByUid(food.getUid()));
+            liulans.add(userService.getliulanbyfid(food.getFid()).size());
+        }
+        PageInfo pageInfo=new PageInfo(foods);
+        System.out.println("dd"+foods.toString()+"uid:"+uid);
+        model.addAttribute("liulansize",liulans);
+        model.addAttribute("usernames",usernames);
+        model.addAttribute("foods",pageInfo);
+        return "user/useradmin";
     }
 
 }

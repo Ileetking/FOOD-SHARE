@@ -8,6 +8,7 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.tab.pojo.*;
 import com.tab.service.FoodService;
 import com.tab.service.UserService;
+import com.util.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class FoodController {
     @Autowired
     @Qualifier("UserServiceImpl")
     private UserService userService;
+    public FoodController() throws IOException {
+    }
     @RequestMapping("/addFood")
     public String addFood(Food food, MultipartFile file,HttpSession session) throws IOException {
 
@@ -104,6 +107,58 @@ public class FoodController {
             model.addAttribute("foods",pageInfo);
         return "index";
     }
+
+    @RequestMapping("/allfoodbycity")
+    public String allfoodbycity(Model model,
+                          @RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                          @RequestParam(name = "size",required = true,defaultValue = "18")int size) throws IOException {
+        List<Category> allname= foodService.queryAll();
+//            List<Food> foods=foodService.queryFood(page, size);
+        IpUtil getlocalip=new IpUtil();
+        String ipj=getlocalip.getV4IP();
+        String address= getlocalip.getipjson(ipj);
+        getlocalip.setAddress(address);
+        String city=address.substring(0,address.length()-3);
+        List<Food> foods=foodService.queryfoodbycity(city);
+        System.out.println("city:"+city);
+        List<String> usernames=new ArrayList<String>();
+        List<Integer> liulans=new ArrayList<Integer>();
+        for (Food food : foods) {
+            usernames.add(foodService.queryUsernameByUid(food.getUid()));
+            liulans.add(userService.getliulanbyfid(food.getFid()).size());
+        }
+        PageInfo pageInfo=new PageInfo(foods);
+        model.addAttribute("liulansize",liulans);
+        model.addAttribute("usernames",usernames);
+        model.addAttribute("allname1",allname);
+        model.addAttribute("foods",pageInfo);
+        return "index";
+    }
+
+    @RequestMapping("/allfoodbyaddress")
+    public String allfoodbyaddress(Model model,
+                                @RequestParam(name = "page",required = true,defaultValue = "1")int page,
+                                @RequestParam(name = "size",required = true,defaultValue = "18")int size) throws IOException {
+        List<Category> allname= foodService.queryAll();
+//            List<Food> foods=foodService.queryFood(page, size);
+        String address=new IpUtil().getAddress();
+        String city=address.substring(address.length()-3,address.length());
+        List<Food> foods=foodService.queryfoodbycity(city);
+        System.out.println("city:"+city);
+        List<String> usernames=new ArrayList<String>();
+        List<Integer> liulans=new ArrayList<Integer>();
+        for (Food food : foods) {
+            usernames.add(foodService.queryUsernameByUid(food.getUid()));
+            liulans.add(userService.getliulanbyfid(food.getFid()).size());
+        }
+        PageInfo pageInfo=new PageInfo(foods);
+        model.addAttribute("liulansize",liulans);
+        model.addAttribute("usernames",usernames);
+        model.addAttribute("allname1",allname);
+        model.addAttribute("foods",pageInfo);
+        return "index";
+    }
+
     @RequestMapping("/article1/{fid}")
     public String queryfoodbyid(@PathVariable("fid")int fid, Model model){
         System.out.println("fid："+fid);
@@ -114,9 +169,12 @@ public class FoodController {
     }
     @RequestMapping("/categoryfood/{cid}")
    public String querycategorybyid(@PathVariable("cid")int cid,Model model,@RequestParam(name = "page",required = true,defaultValue = "1")int page,
-                                   @RequestParam(name = "size",required = true,defaultValue = "18")int size){
+                                   @RequestParam(name = "size",required = true,defaultValue = "18")int size) throws IOException {
         List<Category> allname= foodService.queryAll();
-        List<Food> foods=foodService.queryFoodByCid(cid,page,size);
+        IpUtil getlocalip=new IpUtil();
+        String address= getlocalip.getAddress();
+        String city=address.substring(0,address.length()-3);
+        List<Food> foods=foodService.queryFoodByCid(cid,city,page,size);
         List<String> usernames=new ArrayList<String>();
         for (Food food : foods) {
             usernames.add(foodService.queryUsernameByUid(food.getUid()));
@@ -248,6 +306,11 @@ public class FoodController {
 //        System.out.println("uid::"+uid);
         return "food/article2";
 
+    }
+
+    @RequestMapping("/bainji")
+    public String bianji(){
+     return "";
     }
 
 

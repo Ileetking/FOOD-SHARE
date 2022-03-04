@@ -14,7 +14,7 @@ public interface FoodMapper {
     public String queryUserByFid(int fid);
     public List<Category> queryAll();
     public String queryUsernameByUid(int uid);
-    public List<Food> queryFoodByCid(int cid);
+    public List<Food> queryFoodByCid(int cid,String city);
     public List<Food> queryFoodBysearch(String search);
     public List<Commentary> querycommentarysByFid(int fid);
     public int Addcommentary(Commentary commentary);
@@ -28,6 +28,10 @@ public interface FoodMapper {
     public List<Shouchang> queryShouchangby(int uid,int fid);
     public int chanleshouchang(int uid,int fid);
     public List<Liulan> allliulan(int fid);
+    public List<Food> queryfoodbycity(String address);
+    public List<Food> queryfoodbydianzan(int uid);
+    public List<Food> queryfoodbyshouchang(int uid);
+    public List<Food> queryfoodbypinglun(int uid);
 
 
 }

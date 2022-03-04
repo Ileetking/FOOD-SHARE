@@ -5,7 +5,8 @@
     <link rel="icon" href="/foodimages/tubiao1.png" type="image/x-icon"/>
 </head>
 <body>
-<form name="myform" action="${pageContext.request.contextPath}/food/allfood" method="post"></form>
+<form name="myform" action="${pageContext.request.contextPath}/food/allfoodbycity" method="post">
+</form>
 <script language="javascript">
     document.myform.submit();
 </script>

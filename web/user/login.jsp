@@ -36,7 +36,50 @@
         .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
         input[type="text"],input[type="password"]{padding-left:26px;}
         .checkbox{padding-left:21px;}
+
+        .code
+        {
+            background-color: silver;
+            font-family:Arial; /*设置字体*/
+            font-style:initial;
+            color:brown;
+            font-size:12px;
+            border:0px;
+            padding:2px 3px;
+            letter-spacing:42px;
+            font-weight:bolder;
+
+            width:225px;
+            height:21px;
+
+            float: right;
+            /*margin-left: 120px;*/
+            /*margin-top: -35px;*/
+
+        }
     </style>
+    <script language="javascript" type="text/javascript">
+
+        var code;
+        function createCode() {  //函数体
+            code = "";
+            var codeLength = 5; //验证码的长度
+            var checkCode = document.getElementById("checkCode");
+            var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+            for (var i = 0; i < codeLength; i++)
+            {
+                var charNum = Math.floor(Math.random() * 52);//设置随机产生
+                code += codeChars[charNum];
+            }
+            if (checkCode)
+            {
+                checkCode.className = "code";
+                checkCode.innerHTML = code;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -54,7 +97,14 @@
                     <input class="form-control required" type="password" placeholder="Password" name="password" maxlength="8"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success pull-right" id="logi" value="登录"/>
+                    <i class="fa fa-lock fa-lg"></i>
+                    <input class="form-control required" type="text" placeholder="Verification" name="verification" maxlength="5"/>
+                    <div class="code" id="checkCode" onclick="createCode()"></div>
+                    <%--                    <a class="yz"  href="#" onclick="createCode()">看不清换一张</a>--%>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="codeu" name="codeu"/>
+                    <input type="submit" class="btn btn-success pull-right" id="logi" value="登录" onclick="getdom()"/>
                 </div>
             </div>
         </form>
@@ -63,4 +113,12 @@
 
 </div>
 </body>
+<script>
+    function getdom() {
+        $("#codeu").attr("value",code);
+    }
+</script>
+<script>
+    window.onload=createCode();
+</script>
 </html>

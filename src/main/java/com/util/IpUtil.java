@@ -19,6 +19,15 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 public class IpUtil {
+    public String ipj=getV4IP();
+   public String address= getipjson(ipj);
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
     private static final String[] HEADERS = {
             "X-Forwarded-For",
             "Proxy-Client-IP",
@@ -33,6 +42,9 @@ public class IpUtil {
             "REMOTE_ADDR",
             "X-Real-IP"
     };
+
+    public IpUtil() throws IOException {
+    }
 
     /**
      * 判断ip是否为空，空返回true
@@ -104,7 +116,7 @@ public class IpUtil {
      * 获取外网ip
      * @return String
      */
-    public static String getV4IP() throws IOException {
+    public  String getV4IP() throws IOException {
         String ip = "";
         String chinaz = "https://www.ip138.com/";
         String inputLine = "";
@@ -136,7 +148,7 @@ public class IpUtil {
 
     }
 
-    public String getipjson(String ip) throws IOException {
+    public  String getipjson(String ip) throws IOException {
         String url="https://api.ip138.com/ip/?ip="+ip+"&datatype=jsonp&token=1ec1489ac9367a658e06d41137f79b4c";
         String line="";
         String buffer="";

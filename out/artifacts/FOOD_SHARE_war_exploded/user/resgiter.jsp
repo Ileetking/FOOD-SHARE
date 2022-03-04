@@ -32,7 +32,7 @@
             font-size:12px;
             border:0px;
             padding:2px 3px;
-            letter-spacing:46px;
+            letter-spacing:42px;
             font-weight:bolder;
 
             width:225px;
