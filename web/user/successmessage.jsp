@@ -25,7 +25,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4>
                     SUCCESS
-                </h4> <strong>修改成功</strong> 你已经成功修改了~~~~~ <a href="/user/updateusernane.jsp" class="alert-link">返回</a>
+                </h4> <strong>成功啦</strong> 你已经操作成功了~~~~~ <a href="/user/updateusernane.jsp" class="alert-link">返回</a>
             </div>
         </div>
     </div>

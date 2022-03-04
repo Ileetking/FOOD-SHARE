@@ -116,7 +116,7 @@
                     </div>
                   </div>
                   <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
-                    <p><%=request.getSession().getAttribute("address")%><a href="#" style="font-size: 12px">（切换城市）</a></p>
+                    <p><%=request.getSession().getAttribute("address")%><a href="#" style="font-size: 12px"></a></p>
                   </div>
 
                   <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">

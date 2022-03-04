@@ -366,6 +366,12 @@ public class FoodController {
         return "redirect:/food/allfood";
     }
 
+    @RequestMapping("/deletefood/{fid}")
+    public String deletefood(@PathVariable("fid") int fid){
+        foodService.deleteFood(fid);
+        return "/user/successmessage";
+    }
+
 
 }
 

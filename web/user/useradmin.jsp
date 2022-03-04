@@ -28,7 +28,7 @@
 <c:forEach var="allfood" items="${foods.list}" varStatus="varstatus">
     <c:if test="${allfood.fid!=null}">
         <div class="col-sm-6 col-md-2">
-                        <div class="thumbnail" style="height: 220px">
+                        <div class="thumbnail" style="height: 220px;width: 152px">
                             <img alt="${allfood.description}" title="${allfood.description}" src="/foodimages/${allfood.img}" style="width:100%; height: 100px" onclick="location.href='${pageContext.request.contextPath}/food/commentaries/${allfood.fid}'"
                             />
                             <div style="height: 20px">
@@ -53,7 +53,7 @@
 <%--                                    <input type="submit" value="删除" />--%>
 <%--                                </form>--%>
                                <button type="button" class="btn btn-default"><a href="/food/tobainji/${allfood.fid}">编辑</a></button>
-                                <button type="button" class="btn btn-default"><a href="">删除</a></button>
+                                <button type="button" class="btn btn-default"><a href="/food/deletefood/${allfood.fid}">删除</a></button>
                             </div>
                         </div>
         </div>

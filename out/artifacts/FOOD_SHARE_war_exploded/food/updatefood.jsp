@@ -62,7 +62,7 @@
                     <div id="toolbar-container" class="toolbar"></div>
                 </div>
                 <textarea  name="article" id="txtIntro"   style="display: none" ></textarea>
-                <script>document.getElementById(txtIntro).value=${artile}</script>
+                <script>document.getElementById("txtIntro").value=${artile}</script>
                 <div id="d4"></div>
                 <div class="checkbox">
                 </div> <button id="button" type="submit" class="btn btn-default">上传更新</button>

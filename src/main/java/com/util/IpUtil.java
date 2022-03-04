@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class IpUtil {
     public String ipj=getV4IP();
-   public String address= getipjson(ipj);
+   public String address="广东深圳南山区";
 
     public String getAddress() {
         return address;
@@ -149,7 +149,7 @@ public class IpUtil {
     }
 
     public  String getipjson(String ip) throws IOException {
-        String url="https://api.ip138.com/ip/?ip="+ip+"&datatype=jsonp&token=1ec1489ac9367a658e06d41137f79b4c";
+        String url="https://api.ip138.com/ip/?ip="+ip+"&datatype=jsonp&token=55394386fc9822c44acd9142ce8b2663";
         String line="";
         String buffer="";
         BufferedReader in1 = null;
