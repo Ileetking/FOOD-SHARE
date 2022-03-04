@@ -117,7 +117,7 @@ public class FoodController {
         String address= getlocalip.getipjson(ipj);
         getlocalip.setAddress(address);
         String city=address.substring(0,address.length()-3);
-        List<Food> foods=foodService.queryfoodbycity(city);
+        List<Food> foods=foodService.queryfoodbycity(city,page,size);
         System.out.println("city:"+city);
         List<String> usernames=new ArrayList<String>();
         List<Integer> liulans=new ArrayList<Integer>();
@@ -141,7 +141,7 @@ public class FoodController {
 //            List<Food> foods=foodService.queryFood(page, size);
         String address=new IpUtil().getAddress();
         String city=address.substring(address.length()-3,address.length());
-        List<Food> foods=foodService.queryfoodbycity(city);
+        List<Food> foods=foodService.queryfoodbycity(city,page,size);
         System.out.println("city:"+city);
         List<String> usernames=new ArrayList<String>();
         List<Integer> liulans=new ArrayList<Integer>();

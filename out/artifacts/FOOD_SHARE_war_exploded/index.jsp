@@ -187,8 +187,6 @@
                 <img src="/foodimages/user.png" style="width: 13px;height: 13px;margin-left: 8px"/>
                 <a style="font-size: 13px;color: #666666;" href="${pageContext.request.contextPath}/user/usermessage/${allfood.uid}">${usernames[varstatus.count-1]}</a>
               </div>
-
-
             </div>
           </div>
           </c:if>

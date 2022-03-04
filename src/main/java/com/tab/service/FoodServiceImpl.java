@@ -107,7 +107,8 @@ public class FoodServiceImpl implements FoodService{
         return foodMapper.allliulan(fid);
     }
 
-    public List<Food> queryfoodbycity(String address) {
+    public List<Food> queryfoodbycity(String address,int page,int size) {
+        PageHelper.startPage(page,size);
         return foodMapper.queryfoodbycity(address);
     }
 

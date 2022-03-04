@@ -29,7 +29,7 @@ public interface FoodService {
     public List<Dianzhang> queryalldianzan(int fid);
     public List<Shouchang> queryallshouchang(int fid);
     public List<Liulan> allliulan(int fid);
-    public List<Food> queryfoodbycity(String address);
+    public List<Food> queryfoodbycity(String address,int page,int size);
     public List<Food> queryfoodbydianzan(int uid,int page,int size);
     public List<Food> queryfoodbyshouchang(int uid,int page,int size);
     public List<Food> queryfoodbypinglun(int uid,int page,int size);
